@@ -1,4 +1,4 @@
-const playwright = require('playwright');
+const playwright = require('@playwright/test');
 const { BeforeAll, Before, After, AfterAll , Status } = require('@cucumber/cucumber');
 const cucumber = require('../cucumber');
 

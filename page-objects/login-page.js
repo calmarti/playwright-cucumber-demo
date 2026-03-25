@@ -1,4 +1,4 @@
-import { expect } from 'chai';
+const { expect } = require('@playwright/test');
 
 /*  locators = {
    "username_input": "#user-name",
@@ -25,7 +25,7 @@ class LoginPage {
   }
 
   async verifyLoginPageIsDisplayed() {
-    return expect(await this.page.title()).to.contain('Test Login');
+    return expect(await this.page.title()).toHaveText('Test Login');
   }
 
   async submitLoginForm() {
