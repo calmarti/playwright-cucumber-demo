@@ -23,11 +23,11 @@ Feature: Login Page
 
     Scenario: login using vaild user but invaild password credentials 
     Given I am on the login screen
-    When I fill the login form with vaild user but invaild password credentials 
+    When I fill the login form with validd user but invalid password credentials 
     Then I should see error "Epic sadface: Username and password do not match any user in this service"
 
     Scenario: login using invaild user but vaild password credentials 
     Given I am on the login screen
-    When I fill the login form with invaild user but vaild password credentials 
+    When I fill the login form with invalid user but valid password credentials 
     Then I should see error "Epic sadface: Username and password do not match any user in this service"
 

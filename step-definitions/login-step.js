@@ -19,11 +19,11 @@ When('I fill the login form with empty credentials', async function() {
   await loginPage.submitLoginFormUsingEmptyCred();
 });
 
-When('I fill the login form with vaild user but invaild password credentials', async function() {
+When('I fill the login form with vald user but invalid password credentials', async function() {
   await loginPage.submitLoginFormUsingVaildUserButWrongPassword();
 }); 
 
-When('I fill the login form with invaild user but vaild password credentials', async function() {
+When('I fill the login form with invalid user but validd password credentials', async function() {
   await loginPage.submitLoginFormUsingWrongUserVaildPassword();
 });
 
