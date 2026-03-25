@@ -2,43 +2,43 @@ const playwright = require('playwright');
 const { BeforeAll, Before, After, AfterAll , Status } = require('@cucumber/cucumber');
 const cucumber = require('../cucumber');
 
-// const { World } = require('@cucumber/cucumber')
-
 // Launch options.
 const options = {
   headless: false,
   slowMo: 100
 };
 
-// Create a global browser for the test session.
-BeforeAll(async () => {
+let browser;
+
+// Create a browser engine for the entire test suite
+BeforeAll(async function () {
   console.log('before all ...');
-  global.browser = await playwright['chromium'].launch(options);
+  browser = await playwright['chromium'].launch(options);
 });
 
-AfterAll(async () => {
+AfterAll(async function () {
   console.log('after all ...');
-  await global.browser.close();
+  await browser.close();
 });
 
-// Create a fresh browser context for each test.
-Before(async () => {
+// Create a fresh browser context and page for each test
+Before(async function () {
   console.log('before ...');
-  global.context = await global.browser.newContext();
-  global.page = await global.context.newPage();
+  this.context = await browser.newContext();
+  this.page = await this.context.newPage();
 });
 
-// close the page and context after each test.
-After(async () => {
+// Close the page and context after each test
+After(async function () {
   console.log('after pass...');
-  await global.page.close();
-  await global.context.close();
+  await this.page.close();
+  await this.context.close();
 });
 
 
-After(async function (scenario) {
+/* After(async function (scenario) {
   if (scenario.result.status === Status.FAILED) {
     var buffer = await global.page.screenshot({ path: `reports/${scenario.pickle.name}.png`, fullPage: true })
     this.attach(buffer, 'image/png');
   }
-});
+}); */
