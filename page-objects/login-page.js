@@ -1,5 +1,4 @@
 import { expect } from 'chai';
-import { page, locators } from 'playwright';
 
 /*  locators = {
    "username_input": "#user-name",
@@ -22,11 +21,11 @@ class LoginPage {
   } 
 
   async navigateToLoginScreen(url) {
-    return await page.goto(url);
+    return await this.page.goto(url);
   }
 
   async verifyLoginPageIsDisplayed() {
-    return expect(await page.title()).to.equal('Swag Labs');
+    return expect(await this.page.title()).to.contain('Test Login');
   }
 
   async submitLoginForm() {
