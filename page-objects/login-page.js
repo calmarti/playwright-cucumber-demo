@@ -1,86 +1,52 @@
 const { expect } = require('@playwright/test');
 
-/*  locators = {
-   "username_input": "#user-name",
-   "password_input": "#password",
-   "login_button": "#login-button",
-   "inventory_container": "#inventory_container",
-   "error" : "[data-test=\"error\"]"
- } */
-
-
 class LoginPage {
 
+/**
+   * @param {import('@playwright/test').Page} page
+   */
   constructor(page) {
     this.page = page;
     this.usernameInput = page.locator("#user-name");
-    this.pageasswordInput = page.locator("#password");
-    this.login_button = page.locator("#login-button");
-    this.inventory_container = page.locator("#inventory_container");
+    this.passwordInput = page.locator("#password");
+    this.submit_button = page.locator("#login-button");
+    this.home_unique_selector = page.locator("#shopping_cart_container");
     this.error = page.locator("[data-test=\"error\"]");
-  } 
+  }
 
   async navigateToLoginScreen(url) {
-    return await this.page.goto(url);
+    await this.page.goto(url);
+    //await this.page.waitForURL(url);
   }
 
   async verifyLoginPageIsDisplayed() {
-    return expect(await this.page.title()).toHaveText('Test Login');
+    //expect(this.page).toHaveURL(this.world.BASE_URL + "/inventory.html");
+    const title = await this.page.title();
+    await expect(title).toMatch(/Swag Labs/i);
   }
 
-  async submitLoginForm() {
-    const element = await page.waitForSelector(locators.username_input);
-    await page.fill(locators.username_input, 'standard_user');
-    await page.fill(locators.password_input, 'secret_sauce');
-    await page.click(locators.login_button);
+  async fillLoginForm(username, password) {
+    await expect(this.usernameInput).toBeVisible();
+    await this.usernameInput.fill(username);
+    await expect(this.usernameInput).toHaveValue(username);
+    await expect(this.passwordInput).toBeVisible();
+    await this.passwordInput.fill(password);
+    await expect(this.passwordInput).toHaveValue(password);   
+  } 
+  
+  async clickSubmitButton() {
+    await expect(this.submit_button).toBeVisible();
+    await this.submit_button.click();
   }
 
-
-  async submitLoginFormWrongUserCred() {
-    const element = await page.waitForSelector(locators.username_input);
-    await page.fill(locators.username_input, '7656787654');
-    await page.fill(locators.password_input, '76545678876');
-    await page.click(locators.login_button);
+  async verifySuccesfulLogin() {
+    await expect(this.home_unique_selector).toBeVisible();
   }
 
-  async submitLoginFormUsingEmptyCred() {
-    const element = await page.waitForSelector(locators.username_input);
-    await page.fill(locators.username_input, '');
-    await page.fill(locators.password_input, '');
-    await page.click(locators.login_button);
+  async verifyErrorMsg(errorMsg) {
+    await expect(this.error).toBeVisible();
+    await expect(this.error).toHaveText(errorMsg);
   }
-
-  async submitLoginFormUsingVaildUserButWrongPassword() {
-    const element = await page.waitForSelector(locators.username_input);
-    await page.fill(locators.username_input, 'standard_user');
-    await page.fill(locators.password_input, 'weverve');
-    await page.click(locators.login_button);
-  }
-
-  async submitLoginFormUsingWrongUserVaildPassword() {
-    const element = await page.waitForSelector(locators.username_input);
-    await page.fill(locators.username_input, 'frebrerb43');
-    await page.fill(locators.password_input, 'secret_sauce');
-    await page.click(locators.login_button);
-  }
-
-  async verifyAfterLoginPage() {
-    await page.waitForSelector(locators.inventory_container);
-    const visible = await page.isVisible(locators.inventory_container);
-    return expect(visible).to.equal(true);
-  }
-
-  async verifyErrorMsg(error) {
-    await page.waitForSelector(locators.error);
-    const errorMsg = await page.locator(locators.error).innerText();
-    return expect(errorMsg.includes(error)).to.equal(true, `was looking text : ${error} but did not find it. found text ${errorMsg}`);
-
-
-
-  }
-
-
-
 
 }
 
