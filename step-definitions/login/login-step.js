@@ -2,8 +2,8 @@ const { Given, When , Then } = require('@cucumber/cucumber');
 const { LoginPage } = require('../../page-objects/login-page');
 
 Given('I am on the login screen', async function() {
-  const loginPage = new LoginPage(this.page); 
-  await loginPage.navigateToLoginScreen(this.BASE_URL);
+  const loginPage = new LoginPage(this.page, this.BASE_URL); 
+  await loginPage.navigateToLoginPage();
   await loginPage.verifyLoginPageIsDisplayed();
 });
 
