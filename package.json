@@ -4,7 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "./node_modules/.bin/cucumber-js --require cucumber.js --require step-definitions/**/*.js --require features/**/*.js --format html:./reports/cucumber_report.html --format summary --format @cucumber/pretty-formatter --no-strict --publish-quiet"
+    "test:all": "cucumber-js features/**/*.feature --format html:reports/cucumber_report.html --format summary --format @cucumber/pretty-formatter --publish --publish-quiet",
+    "test": "cucumber-js",    
+    "postinstall":"npx playwright install --with-deps"
   },
   "keywords": [],
   "author": "",
@@ -14,11 +16,7 @@
     "@cucumber/pretty-formatter": "^1.0.0-alpha.0",
     "@playwright/test": "^1.58.2",
     "@types/node": "^25.5.0",
-    "chai": "^4.2.0",
     "cucumber-html-reporter": "^5.3.0",
-    "eslint": "^9.39.2",
-    "install": "^0.13.0",
-    "npm": "^11.12.0",
-    "playwright": "^1.8.0"
+    "eslint": "^9.39.2"
   }
 }
