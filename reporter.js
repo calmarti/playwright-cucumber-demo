@@ -1,5 +1,7 @@
 let reporter = require('cucumber-html-reporter');
 
+//TODO: NOT being used yet, to use it uncomment last line of this file and add a script in package.json to generate the report after running the tests, for example: "report": "node reporter.js"
+
 let options = {
         theme: 'bootstrap',
         jsonFile: 'reports/cucumber_report.json',
@@ -18,4 +20,4 @@ let options = {
         }
     };
 
-    reporter.generate(options);
+  /*   reporter.generate(options); */

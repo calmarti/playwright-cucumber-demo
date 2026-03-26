@@ -35,6 +35,21 @@ After(async function () {
 });
 
 
+After(async function (scenario) {
+    // 1. Check if the scenario actually failed
+    if (scenario.result?.status === Status.FAILED) {        
+        // 2. Take a screenshot of the failure
+          const image = await this.page.screenshot({ 
+            path: `./reports/screenshots/${scenario.pickle.name}.png`,
+            fullPage: true 
+        });
+        // 3. ATTACH it to the Cucumber HTML report
+        // This is the step that tells the HTML formatter: "Hey, this failed!"
+        await this.attach(image, 'image/png');        
+        console.log(`\n ❌ Scenario Failed: ${scenario.pickle.name} - Screenshot captured.`);
+    }
+  }); 
+
 /* After(async function (scenario) {
   if (scenario.result.status === Status.FAILED) {
     var buffer = await global.page.screenshot({ path: `reports/${scenario.pickle.name}.png`, fullPage: true })
