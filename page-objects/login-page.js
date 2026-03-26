@@ -5,8 +5,9 @@ class LoginPage {
 /**
    * @param {import('@playwright/test').Page} page
    */
-  constructor(page) {
+  constructor(page, baseUrl) {
     this.page = page;
+    this.baseUrl = baseUrl;
     this.usernameInput = page.locator("#user-name");
     this.passwordInput = page.locator("#password");
     this.submit_button = page.locator("#login-button");
@@ -14,13 +15,12 @@ class LoginPage {
     this.error = page.locator("[data-test=\"error\"]");
   }
 
-  async navigateToLoginScreen(url) {
-    await this.page.goto(url);
-    //await this.page.waitForURL(url);
+  async navigateToLoginPage() {
+    await this.page.goto(this.baseUrl);
   }
 
   async verifyLoginPageIsDisplayed() {
-    //expect(this.page).toHaveURL(this.world.BASE_URL + "/inventory.html");
+    await expect(this.page).toHaveURL(/.*saucedemo\.com\/?/);
     const title = await this.page.title();
     await expect(title).toMatch(/Swag Labs/i);
   }
@@ -40,6 +40,7 @@ class LoginPage {
   }
 
   async verifySuccesfulLogin() {
+    await expect(this.page).toHaveURL(/.*saucedemo\.com\/inventory\.html\/?$/);
     await expect(this.home_unique_selector).toBeVisible();
   }
 
