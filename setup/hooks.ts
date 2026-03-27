@@ -3,8 +3,8 @@ import { BeforeAll, Before, After, AfterAll, Status, ITestCaseHookParameter } fr
 
 // Launch options.
 const options = {
-  headless: false,
-  slowMo: 100
+  headless: process.env.CI ? true : false,
+  slowMo: process.env.CI ? 0 : 100
 };
 
 let browser: Browser;
