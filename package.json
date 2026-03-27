@@ -6,7 +6,7 @@
   "scripts": {
     "test:all": "cucumber-js features/**/*.feature --format html:reports/cucumber_report.html --format summary --format @cucumber/pretty-formatter --publish --publish-quiet",
     "test": "rm -rf reports && mkdir reports && cucumber-js --format html:reports/local_report.html --format summary --format @cucumber/pretty-formatter",
-    "report":"start reports/local_report.html"  
+    "report": "start reports/local_report.html"
   },
   "keywords": [],
   "author": "",
@@ -15,8 +15,11 @@
     "@cucumber/cucumber": "^7.0.0",
     "@cucumber/pretty-formatter": "^1.0.0-alpha.0",
     "@playwright/test": "^1.58.2",
+    "@types/cucumber": "^6.0.1",
     "@types/node": "^25.5.0",
     "cucumber-html-reporter": "^5.3.0",
-    "eslint": "^9.39.2"
+    "eslint": "^9.39.2",
+    "ts-node": "^10.9.2",
+    "typescript": "^6.0.2"
   }
 }
