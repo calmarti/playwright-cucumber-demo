@@ -1,11 +1,15 @@
-const { expect } = require('@playwright/test');
+import { expect, Page, Locator }  from '@playwright/test';
 
 class LoginPage {
-
-/**
-   * @param {import('@playwright/test').Page} page
-   */
-  constructor(page, baseUrl) {
+  baseUrl: string;
+  page: Page;
+  usernameInput: Locator;
+  passwordInput: Locator;
+  submit_button: Locator;
+  home_unique_selector: Locator;
+  error: Locator;
+  
+  constructor(page: Page, baseUrl: string) {
     this.page = page;
     this.baseUrl = baseUrl;
     this.usernameInput = page.locator("#user-name");
@@ -25,7 +29,7 @@ class LoginPage {
     await expect(title).toMatch(/Swag Labs/i);
   }
 
-  async fillLoginForm(username, password) {
+  async fillLoginForm(username:string, password:string) {
     await expect(this.usernameInput).toBeVisible();
     await this.usernameInput.fill(username);
     await expect(this.usernameInput).toHaveValue(username);
@@ -44,12 +48,11 @@ class LoginPage {
     await expect(this.home_unique_selector).toBeVisible();
   }
 
-  async verifyErrorMsg(errorMsg) {
+  async verifyErrorMsg(errorMsg:string) {
     await expect(this.error).toBeVisible();
     await expect(this.error).toHaveText(errorMsg);
   }
 
 }
 
-
-module.exports = { LoginPage };
+export { LoginPage };
