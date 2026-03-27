@@ -4,9 +4,9 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test:all": "cucumber-js features/**/*.feature --format html:reports/cucumber_report.html --format summary --format @cucumber/pretty-formatter --publish --publish-quiet",
-    "test": "rm -rf reports && mkdir reports && cucumber-js --format html:reports/local_report.html --format summary --format @cucumber/pretty-formatter",
-    "report": "start reports/local_report.html"
+    "test:all": "rm -rf reports && mkdir reports && cucumber-js features/**/*.feature --format html:reports/cucumber_report.html --format summary --format @cucumber/pretty-formatter --publish --publish-quiet",
+    "test": "rm -rf reports && mkdir reports && cucumber-js --format html:reports/cucumber_report.html --format summary --format @cucumber/pretty-formatter --publish --publish-quiet",
+    "report:local": "start reports/local_report.html"
   },
   "keywords": [],
   "author": "",

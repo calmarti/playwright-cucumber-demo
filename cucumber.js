@@ -1,8 +1,9 @@
 const common = `
-  --require  setup/world.js
-  --require setup/hooks.js
-  --require step-definitions/**/*.js
-  --format progress'                 
+  --require-module ts-node/register
+  --require  setup/world.ts
+  --require setup/hooks.ts
+  --require step-definitions/**/*.ts
+  --format progress                 
   `;
 
 module.exports = {

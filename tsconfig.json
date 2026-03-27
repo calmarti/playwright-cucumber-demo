@@ -1,7 +1,7 @@
 {
   "compilerOptions": {
     /* Basic Options */
-    "target": "ESNext",             // Modern JS for modern Playwright/Node
+    "target": "es2020",             // Modern JS for modern Playwright/Node
     "module": "CommonJS",           // Keeps your existing module system
     "moduleResolution": "node",     // How TS finds your packages
     "lib": ["ESNext", "DOM"],       // Adds support for modern APIs
