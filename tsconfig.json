@@ -8,7 +8,7 @@
     
     /* Strictness - The "Upgrade" part */
     "strict": true,                 // Turns on all type-checking (recommended)
-    "noImplicitAny": false,         // Set to true later once you are comfortable
+    "noImplicitAny": true,         // Set to true later once you are comfortable
     
     /* Compatibility */
     "esModuleInterop": true,        // Allows easy imports (import fs from 'fs')
