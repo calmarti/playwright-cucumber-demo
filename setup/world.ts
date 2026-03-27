@@ -1,7 +1,7 @@
 import { setWorldConstructor, World, IWorldOptions } from '@cucumber/cucumber';
 import { BrowserContext, Page } from '@playwright/test';
 
-class CustomWorld extends World {
+export class CustomWorld extends World {
     BASE_URL: string;
     context: BrowserContext | null;
     page: Page | null;

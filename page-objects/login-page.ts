@@ -1,7 +1,6 @@
 import { expect, Page, Locator }  from '@playwright/test';
 
 class LoginPage {
-  baseUrl: string;
   page: Page;
   usernameInput: Locator;
   passwordInput: Locator;
@@ -9,18 +8,16 @@ class LoginPage {
   home_unique_selector: Locator;
   error: Locator;
   
-  constructor(page: Page, baseUrl: string) {
+  constructor(page: Page) {
     this.page = page;
-    this.baseUrl = baseUrl;
     this.usernameInput = page.locator("#user-name");
     this.passwordInput = page.locator("#password");
     this.submit_button = page.locator("#login-button");
     this.home_unique_selector = page.locator("#shopping_cart_container");
     this.error = page.locator("[data-test=\"error\"]");
-  }
-
-  async navigateToLoginPage() {
-    await this.page.goto(this.baseUrl);
+  } 
+  async navigateToLoginPage(url:string) {
+    await this.page.goto(url);
   }
 
   async verifyLoginPageIsDisplayed() {
