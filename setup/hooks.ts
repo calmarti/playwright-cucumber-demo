@@ -1,5 +1,5 @@
-const playwright = require('@playwright/test');
-const { BeforeAll, Before, After, AfterAll , Status } = require('@cucumber/cucumber');
+import { chromium, Browser, BrowserContext, Page } from '@playwright/test';
+import { BeforeAll, Before, After, AfterAll, Status, ITestCaseHookParameter } from '@cucumber/cucumber';
 
 // Launch options.
 const options = {
@@ -7,12 +7,14 @@ const options = {
   slowMo: 100
 };
 
-let browser;
+let browser: Browser;
+let browserContext: BrowserContext;
+let page: Page;
 
 // Create a browser engine for the entire test suite
 BeforeAll(async function () {
   console.log('before all ...');
-  browser = await playwright['chromium'].launch(options);
+  browser = await chromium.launch(options);
 });
 
 AfterAll(async function () {
@@ -21,21 +23,21 @@ AfterAll(async function () {
 });
 
 // Create a fresh browser context and page for each test
-Before(async function () {
+Before(async function (this: any) {
   console.log('before ...');
   this.context = await browser.newContext();
   this.page = await this.context.newPage();
 });
 
 // Close the page and context after each test
-After(async function () {
+After(async function (this: any) {
   console.log('after pass...');
   await this.page.close();
   await this.context.close();
 });
 
 
-After(async function (scenario) {
+After(async function (this: any, scenario: ITestCaseHookParameter) {
     // 1. Check if the scenario actually failed
     if (scenario.result?.status === Status.FAILED) {        
         // 2. Take a screenshot of the failure
