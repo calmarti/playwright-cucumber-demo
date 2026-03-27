@@ -37,7 +37,7 @@ jobs:
          ls -Ra        
       
       - name: Run e2e Tests
-        run: npm test:all
+        run: npm run test:all
 
       - name: Upload Report
         uses: actions/upload-artifact@v4
